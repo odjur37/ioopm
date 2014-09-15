@@ -15,12 +15,33 @@ void readline(char *dest, int n, FILE *source){
     dest[len-1] = '\0';
 }
 
-void readInputFile(FILE *argc){
-  char *filename = argv[1];
+// Prints welcome text in form of ASCII-art
+int print_welcome_text(int argc, char *argv[]){
+  if (argc < 2){
+    puts("Usage: db [FILE]");
+    return -1;
+  }
+  puts("Welcome to");
+  puts(" ____    ____       ");
+  puts("/\\  _`\\ /\\  _`\\     ");
+  puts("\\ \\ \\/\\ \\ \\ \\L\\ \\   ");
+  puts(" \\ \\ \\ \\ \\ \\  _ <\\ ");
+  puts("  \\ \\ \\_\\ \\ \\ \\L\\ \\ ");
+  puts("   \\ \\____/\\ \\____/ ");
+  puts("    \\/___/  \\/___/  ");
+  puts("");
+  return -1;
+}
+
+char buffer[128]; // creates a 128 bytes long vector in the variable buffer
+
+Node list = NULL; // sets the Node-variable list as a pointer to NULL
+
+//Reads the database-file
+void read_input_file(char *db){
+  char *filename = db;
   printf("Loading database \"%s\"...\n\n", filename);
   FILE *database = fopen(filename, "r");
-  char buffer[128];
-  Node list = NULL;
   while(!(feof(database))){
     Node newNode = malloc(sizeof(struct node));
     readline(buffer, 128, database);
@@ -35,22 +56,12 @@ void readInputFile(FILE *argc){
 }
 
 int main(int argc, char *argv[]){
-  if (argc < 2){
-    puts("Usage: db [FILE]");
-    return -1;
-  }
-  puts("Welcome to");
-  puts(" ____    ____       ");
-  puts("/\\  _`\\ /\\  _`\\     ");
-  puts("\\ \\ \\/\\ \\ \\ \\L\\ \\   ");
-  puts(" \\ \\ \\ \\ \\ \\  _ <\\ ");
-  puts("  \\ \\ \\_\\ \\ \\ \\L\\ \\ ");
-  puts("   \\ \\____/\\ \\____/ ");
-  puts("    \\/___/  \\/___/  ");
-  puts("");
+  
+  // Prints welcome text/ASCII-art
+  print_welcome_text(argc, argv);
 
   // Read the input file
-  readInputFile(argv[1]),
+  read_input_file(argv[1]);
   
   // Main loop
   int choice = -1;
