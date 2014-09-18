@@ -33,6 +33,19 @@ int print_welcome_text(int argc, char *argv[]){
   return -1;
 }
 
+void print_options(){
+  puts("Please choose an operation");
+  puts("1. Query a key");
+  puts("2. Update an entry");
+  puts("3. New entry");
+  puts("4. Remove entry");
+  puts("5. Print database");
+  puts("0. Exit database");
+  printf("? ");
+}
+
+int choice = -1;
+
 int found; // cfeates global int variable found
 
 Node cursor; // creates global Node variable cursor
@@ -180,16 +193,8 @@ void update(){
    read_input_file(argv[1]);
    
    // Main loop
-   int choice = -1;
    while(choice != 0){
-     puts("Please choose an operation");
-     puts("1. Query a key");
-     puts("2. Update an entry");
-     puts("3. New entry");
-     puts("4. Remove entry");
-     puts("5. Print database");
-     puts("0. Exit database");
-     printf("? ");
+     print_options();
      scanf("%d", &choice);
      while(getchar() != '\n'); // Clear stdin
      switch(choice){
