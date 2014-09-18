@@ -237,6 +237,6 @@ int main(int argc, char *argv[]){
   read_input_file(argv[1]);
   
   // Main loop
-  main_loop;
+  main_loop();
   return 0;
 } 
