@@ -33,6 +33,7 @@ int print_welcome_text(int argc, char *argv[]){
   return -1;
 }
 
+// Prints out the database options to the console
 void print_options(){
   puts("Please choose an operation");
   puts("1. Query a key");
