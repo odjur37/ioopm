@@ -45,15 +45,20 @@ void print_options(){
   printf("? ");
 }
 
+// creates global int variable choice and sets it to -1
 int choice = -1;
 
-int found; // cfeates global int variable found
+// creates global int variable found
+int found;
 
-Node cursor; // creates global Node variable cursor
+// creates global Node variable cursor
+Node cursor; 
 
-char buffer[128]; // creates a 128 bytes long vector in the variable buffer
+// creates a 128 bytes long vector in the variable buffer
+char buffer[128]; 
 
-Node list = NULL; // sets the Node-variable list as a pointer to NULL
+// sets the Node-variable list as a pointer to NULL
+Node list = NULL; 
 
 //Reads the database-file
 void read_input_file(char *db){
