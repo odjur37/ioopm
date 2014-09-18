@@ -80,6 +80,7 @@ void presets(){
       cursor = list;
 }
 
+// Option 1
 void query(){
   presets();
   while(!found && cursor != NULL){
@@ -95,6 +96,8 @@ void query(){
     printf("Could not find an entry matching key \"%s\"!\n", buffer);
   }
 }
+
+// Option 2
 void update(){
   presets();
   while(!found && cursor != NULL){
@@ -118,6 +121,7 @@ void update(){
   }
 }
 
+// Option 3
 void insert(){
   printf("Enter key: ");
   readline(buffer, 128, stdin);
@@ -149,6 +153,7 @@ void insert(){
   }
 }
 
+// Option 4
 void delete(){
   presets();
   Node prev = NULL;
@@ -171,6 +176,7 @@ void delete(){
   }
 }
 
+// Option 5
 void print_database(){
   cursor = list;
   while(cursor != NULL){
