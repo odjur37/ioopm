@@ -75,7 +75,12 @@ void read_input_file(char *db){
 void presets(){
       printf("Enter key: ");
       readline(buffer, 128, stdin);
-      puts("Searching database...\n");
+      if (choice != 3){
+	  puts("Searching database...\n");
+	}
+      else{
+	puts("Searching databse for duplicate keys...");
+	  }
       found = 0;
       cursor = list;
 }
@@ -123,11 +128,7 @@ void update(){
 
 // Option 3
 void insert(){
-  printf("Enter key: ");
-  readline(buffer, 128, stdin);
-  puts("Searching database for duplicate keys...");
-  found = 0;
-  cursor = list;
+  presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       printf("key \"%s\" already exists!\n", cursor->key);
