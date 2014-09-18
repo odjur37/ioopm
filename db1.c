@@ -72,12 +72,16 @@ void read_input_file(char *db){
   }
 }
 
+void presets(){
+      printf("Enter key: ");
+      readline(buffer, 128, stdin);
+      puts("Searching database...\n");
+      found = 0;
+      cursor = list;
+}
+
 void query(){
-  printf("Enter key: ");
-  readline(buffer, 128, stdin);
-  puts("Searching database...\n");
-  found = 0;
-  cursor = list;
+  presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       puts("Found entry:");
@@ -92,11 +96,7 @@ void query(){
   }
 }
 void update(){
-  printf("Enter key: ");
-  readline(buffer, 128, stdin);
-  puts("Searching database...\n");
-  found = 0;
-  cursor = list;
+  presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       puts("Matching entry found:");
@@ -150,11 +150,7 @@ void insert(){
 }
 
 void delete(){
-  printf("Enter key: ");
-  readline(buffer, 128, stdin);
-  puts("Searching database...\n");
-  found = 0;
-  cursor = list;
+  presets();
   Node prev = NULL;
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
