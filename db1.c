@@ -60,10 +60,16 @@ char buffer[128];
 // sets the Node-variable list as a pointer to NULL
 Node list = NULL; 
 
-//Reads the database-file
+// tells the user that the file is beaing read
+int reading_database(filename){
+  printf("Loading database \"%s\"...\n\n", filename);
+  return 1;
+}
+
+// Reads the database-file
 void read_input_file(char *db){
   char *filename = db;
-  printf("Loading database \"%s\"...\n\n", filename);
+  reading_database(db);
   FILE *database = fopen(filename, "r");
   while(!(feof(database))){
     Node newNode = malloc(sizeof(struct node));
@@ -78,18 +84,35 @@ void read_input_file(char *db){
   }
 }
 
-void presets(){
-      printf("Enter key: ");
-      readline(buffer, 128, stdin);
-      if (choice != 3){
-	  puts("Searching database...\n");
-	}
-      else{
-	puts("Searching databse for duplicate keys...");
-	  }
-      found = 0;
-      cursor = list;
+int request_input(){
+  printf("Enter key: ");
+  return 1;
 }
+
+int inform_of_database_search(){
+  puts("Searching database...\n");
+  return 1;
+}
+
+int inform_of_duplicate_key_search(){
+  puts("Searching databse for duplicate keys...");
+  return 1;
+}
+
+
+void presets(){
+  readline(buffer, 128, stdin);
+  if (choice != 3){
+    inform_of_database_search;
+  }
+  else{
+    inform_of_duplicate_key_search;
+  }
+  found = 0;
+  cursor = list;
+}
+
+
 
 // Option 1
 void query(){
