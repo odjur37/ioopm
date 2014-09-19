@@ -99,6 +99,7 @@ int inform_of_duplicate_key_search(){
 }
 
 void presets(){
+  request_input();
   readline(buffer, 128, stdin);
   if (choice != 3){
     inform_of_database_search();
