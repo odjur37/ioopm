@@ -99,7 +99,6 @@ int inform_of_duplicate_key_search(){
   return 1;
 }
 
-
 void presets(){
   readline(buffer, 128, stdin);
   if (choice != 3){
