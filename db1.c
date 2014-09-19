@@ -61,15 +61,14 @@ char buffer[128];
 Node list = NULL; 
 
 // tells the user that the file is beaing read
-int reading_database(filename){
+void print_loading_database(char* filename){
   printf("Loading database \"%s\"...\n\n", filename);
-  return 1;
 }
 
 // Reads the database-file
 void read_input_file(char *db){
   char *filename = db;
-  reading_database(db);
+  print_loading_database(db);
   FILE *database = fopen(filename, "r");
   while(!(feof(database))){
     Node newNode = malloc(sizeof(struct node));
@@ -102,10 +101,10 @@ int inform_of_duplicate_key_search(){
 void presets(){
   readline(buffer, 128, stdin);
   if (choice != 3){
-    inform_of_database_search;
+    inform_of_database_search();
   }
   else{
-    inform_of_duplicate_key_search;
+    inform_of_duplicate_key_search();
   }
   found = 0;
   cursor = list;
