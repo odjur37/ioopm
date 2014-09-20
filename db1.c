@@ -125,8 +125,8 @@ int print_key_and_value(opt){
   return 1;
 }
 
-int print_no_matching_key(buffer){
-  printf("Could not find an entry matching key \"%d\"!\n", buffer);
+int print_no_matching_key(*buffer){
+  printf("Could not find an entry matching key \"%s\"!\n", buffer);
   return 1;
 }
 
@@ -149,7 +149,7 @@ void query(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
   }
 }
 
@@ -175,7 +175,7 @@ void update(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
   }else{
     request_new_value();
     readline(buffer, 128, stdin);
@@ -248,7 +248,7 @@ void delete(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
     /*    printf("Could not find an entry matching key \"%s\"!\n", buffer);*/
   }
 }
