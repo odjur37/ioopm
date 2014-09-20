@@ -54,7 +54,7 @@ int found;
 // creates global Node variable cursor
 Node cursor; 
 
-// creates a 128 bytes long vector in the variable buffer
+// creates a 128 bytes long array in the variable buffer
 char buffer[128]; 
 
 // sets the Node-variable list as a pointer to NULL
@@ -125,7 +125,7 @@ int print_key_and_value(opt){
   return 1;
 }
 
-int print_no_matching_key(buffer){
+char print_no_matching_key(buffer){
   printf("Could not find an entry matching key \"%d\"!\n", buffer);
   return 1;
 }
@@ -149,7 +149,7 @@ void query(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
   }
 }
 
@@ -175,7 +175,7 @@ void update(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
   }else{
     request_new_value();
     readline(buffer, 128, stdin);
