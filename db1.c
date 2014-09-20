@@ -125,7 +125,7 @@ int print_key_and_value(opt){
   return 1;
 }
 
-int print_no_matching_key(*buffer){
+int print_no_matching_key(char *buffer){
   printf("Could not find an entry matching key \"%s\"!\n", buffer);
   return 1;
 }
