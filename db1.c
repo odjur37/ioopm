@@ -125,7 +125,7 @@ int print_key_and_value(opt){
   return 1;
 }
 
-char print_no_matching_key(buffer){
+int print_no_matching_key(buffer){
   printf("Could not find an entry matching key \"%d\"!\n", buffer);
   return 1;
 }
@@ -248,7 +248,7 @@ void delete(){
     }
   }
   if(!found){
-    print_no_matching_key(*buffer);
+    print_no_matching_key(buffer);
     /*    printf("Could not find an entry matching key \"%s\"!\n", buffer);*/
   }
 }
