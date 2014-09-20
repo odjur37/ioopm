@@ -225,7 +225,7 @@ void insert(){
 }
 
 int print_deleted_entry(){
-
+  printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);
   return 1;
 }
 
@@ -242,7 +242,6 @@ void delete(){
       }
       found = 1;
       print_deleted_entry();
-      /*printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);*/
     }else{
       prev = cursor;
       cursor = cursor->next;
