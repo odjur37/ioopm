@@ -116,8 +116,12 @@ int inform_of_found_entry(){
   return 1;
 }
 
-int print_key_and_value(){
-  printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
+int print_key_and_value(opt){
+  if (opt != 3){
+    printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
+  }else{
+    printf("key: %s\nvalue: %s\n", list->key, list->value);
+  }
   return 1;
 }
 
@@ -138,7 +142,7 @@ void query(){
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_found_entry();
-      print_key_and_value();
+      print_key_and_value(1);
       found = 1;
     }else{
       cursor = cursor->next;
@@ -164,7 +168,7 @@ void update(){
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_matching_entry();
-      print_key_and_value();
+      print_key_and_value(2);
       found = 1;
     }else{
       cursor = cursor->next;
@@ -216,8 +220,13 @@ void insert(){
     list = newNode;
     puts("");
     print_successful_insertion();
-    printf("key: %s\nvalue: %s\n", list->key, list->value);
+    print_key_and_value(3);
   }
+}
+
+int print_deleted_entry(){
+
+  return 1;
 }
 
 // Option 4
@@ -232,14 +241,16 @@ void delete(){
 	prev->next = cursor->next;
       }
       found = 1;
-      printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);
+      print_deleted_entry();
+      /*printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);*/
     }else{
       prev = cursor;
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(*buffer);
+    /*    printf("Could not find an entry matching key \"%s\"!\n", buffer);*/
   }
 }
 
