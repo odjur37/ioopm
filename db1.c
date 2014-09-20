@@ -111,47 +111,85 @@ void presets(){
   cursor = list;
 }
 
+int inform_of_found_entry(){
+  puts("Found entry:");
+  return 1;
+}
 
+int print_key_and_value(){
+  printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
+  return 1;
+}
+
+int print_no_matching_key(buffer){
+  printf("Could not find an entry matching key \"%d\"!\n", buffer);
+  return 1;
+}
+
+
+int inform_of_matching_entry(){
+  puts("Matching entry found:");
+  return 1;
+}
 
 // Option 1
 void query(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      puts("Found entry:");
-      printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
+      inform_of_found_entry();
+      print_key_and_value();
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(*buffer);
   }
 }
 
+int request_new_value(){
+  printf("Enter new value: ");
+  return 1;
+}
+
+int print_successful_insertion(){
+    puts("Value inserted successfully!");
+    return 1;
+}
 // Option 2
 void update(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      puts("Matching entry found:");
-      printf("key: %s\nvalue: %s\n\n", cursor->key, cursor->value);
+      inform_of_matching_entry();
+      print_key_and_value();
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(*buffer);
   }else{
-    printf("Enter new value: ");
+    request_new_value();
     readline(buffer, 128, stdin);
     free(cursor->value);
     cursor->value = malloc(strlen(buffer) + 1);
     strcpy(cursor->value, buffer);
-    puts("Value inserted successfully!");
+    print_successful_insertion();
   }
+}
+
+int print_key_already_exists(){
+  printf("key \"%s\" already exists!\n", cursor->key);
+  return 1;
+}
+
+int print_key_is_unique(){
+  puts("Key is unique!\n");
+  return 1;
 }
 
 // Option 3
@@ -159,25 +197,25 @@ void insert(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      printf("key \"%s\" already exists!\n", cursor->key);
+      print_key_already_exists();
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){ // Insert new node to the front of the list
-    puts("Key is unique!\n");
+    print_key_is_unique();
     Node newNode = malloc(sizeof(struct node));
     newNode->key = malloc(strlen(buffer) + 1);
     strcpy(newNode->key, buffer);
-    printf("Enter value: ");
+    request_new_value();                      // Requests new value from user
     readline(buffer, 128, stdin);
     newNode->value = malloc(strlen(buffer) + 1);
     strcpy(newNode->value, buffer);
     newNode->next = list;
     list = newNode;
     puts("");
-    puts("Entry inserted successfully:");
+    print_successful_insertion();
     printf("key: %s\nvalue: %s\n", list->key, list->value);
   }
 }
