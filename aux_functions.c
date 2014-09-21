@@ -1,6 +1,5 @@
 #include "aux_functions.h"
-#ifndef "my_structs.h"
-#define "my_structs.h"
+#include "my_structs.h"
 
 // creates global int variable choice and sets it to -1
 int choice = -1;
@@ -200,5 +199,3 @@ void main_loop(){
     puts("");
   }
 }
-
-#endif

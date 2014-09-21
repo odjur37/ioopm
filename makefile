@@ -1,4 +1,4 @@
-db: db_main.o aux_functions.o print_functions.o
+db: db_main.o my_structs.o aux_functions.o print_functions.o
 	gcc -g aux_functions.o print_functions.o db_main.o -o db
 
 db_main.o: db_main.c

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "my_structs.h"
 #include "aux_functions.h"
 #include "print_functions.h"
 

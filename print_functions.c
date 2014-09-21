@@ -1,4 +1,5 @@
 #include "print_functions.h"
+#include "my_structs.h"
 
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){

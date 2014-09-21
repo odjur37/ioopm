@@ -1,8 +1,3 @@
-#ifndef "my_structs.h"
-#define "my_structs.h"
-
-typedef struct node;
-
 int choice = -1;
 
 int found;
@@ -30,5 +25,3 @@ void delete();
 void print_database();
 
 void main_loop();
-
-#endif
