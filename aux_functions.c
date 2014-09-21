@@ -13,11 +13,11 @@ int found;
 // creates global Node variable cursor
 Node cursor; 
 
-// creates a 128 bytes long vector in the variable buffer
+// creates a 128 bytes long array in the variable buffer
 char buffer[128]; 
 
 // sets the Node-variable list as a pointer to NULL
-Node list = NULL;
+Node list = NULL; 
 
 void readline(char *dest, int n, FILE *source){
   fgets(dest, n, source);
@@ -26,40 +26,10 @@ void readline(char *dest, int n, FILE *source){
     dest[len-1] = '\0';
 }
 
-// Prints welcome text in form of ASCII-art
-int print_welcome_text(int argc, char *argv[]){
-  if (argc < 2){
-    puts("Usage: db [FILE]");
-    return -1;
-  }
-  puts("Welcome to");
-  puts(" ____    ____       ");
-  puts("/\\  _`\\ /\\  _`\\     ");
-  puts("\\ \\ \\/\\ \\ \\ \\L\\ \\   ");
-  puts(" \\ \\ \\ \\ \\ \\  _ <\\ ");
-  puts("  \\ \\ \\_\\ \\ \\ \\L\\ \\ ");
-  puts("   \\ \\____/\\ \\____/ ");
-  puts("    \\/___/  \\/___/  ");
-  puts("");
-  return -1;
-}
-
-// Prints out the database options to the console
-void print_options(){
-  puts("Please choose an operation");
-  puts("1. Query a key");
-  puts("2. Update an entry");
-  puts("3. New entry");
-  puts("4. Remove entry");
-  puts("5. Print database");
-  puts("0. Exit database");
-  printf("? ");
-} 
-
-//Reads the database-file
+// Reads the database-file
 void read_input_file(char *db){
   char *filename = db;
-  printf("Loading database \"%s\"...\n\n", filename);
+  print_loading_database(db);
   FILE *database = fopen(filename, "r");
   while(!(feof(database))){
     Node newNode = malloc(sizeof(struct node));
@@ -75,16 +45,16 @@ void read_input_file(char *db){
 }
 
 void presets(){
-      printf("Enter key: ");
-      readline(buffer, 128, stdin);
-      if (choice != 3){
-	  puts("Searching database...\n");
-	}
-      else{
-	puts("Searching databse for duplicate keys...");
-	  }
-      found = 0;
-      cursor = list;
+  request_input();
+  readline(buffer, 128, stdin);
+  if (choice != 3){
+    inform_of_database_search();
+  }
+  else{
+    inform_of_duplicate_key_search();
+  }
+  found = 0;
+  cursor = list;
 }
 
 // Option 1
@@ -92,15 +62,15 @@ void query(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      puts("Found entry:");
-      printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
+      inform_of_found_entry();
+      print_key_and_value(1);
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(buffer);
   }
 }
 
@@ -109,22 +79,22 @@ void update(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      puts("Matching entry found:");
-      printf("key: %s\nvalue: %s\n\n", cursor->key, cursor->value);
+      inform_of_matching_entry();
+      print_key_and_value(2);
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(buffer);
   }else{
-    printf("Enter new value: ");
+    request_new_value();
     readline(buffer, 128, stdin);
     free(cursor->value);
     cursor->value = malloc(strlen(buffer) + 1);
     strcpy(cursor->value, buffer);
-    puts("Value inserted successfully!");
+    print_successful_insertion();
   }
 }
 
@@ -133,26 +103,26 @@ void insert(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      printf("key \"%s\" already exists!\n", cursor->key);
+      print_key_already_exists();
       found = 1;
     }else{
       cursor = cursor->next;
     }
   }
   if(!found){ // Insert new node to the front of the list
-    puts("Key is unique!\n");
+    print_key_is_unique();
     Node newNode = malloc(sizeof(struct node));
     newNode->key = malloc(strlen(buffer) + 1);
     strcpy(newNode->key, buffer);
-    printf("Enter value: ");
+    request_new_value();                      // Requests new value from user
     readline(buffer, 128, stdin);
     newNode->value = malloc(strlen(buffer) + 1);
     strcpy(newNode->value, buffer);
     newNode->next = list;
     list = newNode;
     puts("");
-    puts("Entry inserted successfully:");
-    printf("key: %s\nvalue: %s\n", list->key, list->value);
+    print_successful_insertion();
+    print_key_and_value(3);
   }
 }
 
@@ -168,14 +138,14 @@ void delete(){
 	prev->next = cursor->next;
       }
       found = 1;
-      printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);
+      print_deleted_entry();
     }else{
       prev = cursor;
       cursor = cursor->next;
     }
   }
   if(!found){
-    printf("Could not find an entry matching key \"%s\"!\n", buffer);
+    print_no_matching_key(buffer);
   }
 }
 
@@ -222,12 +192,12 @@ void main_loop(){
       
     case 0:
       // Exit
-      puts("Good bye!");
+      print_goodbye();
       break;
       
     default:
       // Please try again
-      puts("Could not parse choice! Please try again");
+      print_try_again();
     }
     puts("");
   }

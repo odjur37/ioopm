@@ -8,6 +8,21 @@ typedef struct node{
   struct node *next;
 } *Node;
 
+// creates global int variable choice and sets it to -1
+int choice = -1;
+
+// creates global int variable found
+int found;
+
+// creates global Node variable cursor
+Node cursor; 
+
+// creates a 128 bytes long array in the variable buffer
+char buffer[128]; 
+
+// sets the Node-variable list as a pointer to NULL
+Node list = NULL; 
+
 void readline(char *dest, int n, FILE *source){
   fgets(dest, n, source);
   int len = strlen(dest);
@@ -44,21 +59,6 @@ void print_options(){
   puts("0. Exit database");
   printf("? ");
 }
-
-// creates global int variable choice and sets it to -1
-int choice = -1;
-
-// creates global int variable found
-int found;
-
-// creates global Node variable cursor
-Node cursor; 
-
-// creates a 128 bytes long array in the variable buffer
-char buffer[128]; 
-
-// sets the Node-variable list as a pointer to NULL
-Node list = NULL; 
 
 // tells the user that the file is beaing read
 void print_loading_database(char* filename){

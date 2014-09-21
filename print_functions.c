@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){
   if (argc < 2){
