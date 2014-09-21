@@ -1,3 +1,5 @@
+#include "print_functions.h"
+
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){
   if (argc < 2){
@@ -53,7 +55,7 @@ int inform_of_found_entry(){
   return 1;
 }
 
-int print_key_and_value(opt){
+int print_key_and_value(int opt){
   if (opt != 3){
     printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
   }else{

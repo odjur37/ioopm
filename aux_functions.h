@@ -1,4 +1,7 @@
-typedef struct node
+#ifndef "my_structs.h"
+#define "my_structs.h"
+
+typedef struct node;
 
 int choice = -1;
 
@@ -10,20 +13,22 @@ char buffer[128];
 
 Node list = NULL; 
 
-void readline(char *dest, int n, FILE *source)
+void readline(char *dest, int n, FILE *source);
 
-void read_input_file(char *db)
+void read_input_file(char *db);
 
-void presets()
+void presets();
 
-void query()
+void query();
 
-void update()
+void update();
 
-void insert()
+void insert();
 
-void delete()
+void delete();
 
-void print_database()
+void print_database();
 
-void main_loop()
+void main_loop();
+
+#endif

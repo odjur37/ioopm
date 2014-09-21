@@ -1,10 +1,14 @@
-db: aux_functions.o global_variables.o main.o
-	gcc -g aux_functions.o global_variables.o main.o -o db
+db: db_main.o aux_functions.o print_functions.o
+	gcc -g aux_functions.o print_functions.o db_main.o -o db
 
-aux_functions.o: global_variables.c
+db_main.o: db_main.c
+	gcc -c -g -std=c99 -Wall db_main.c
+
+aux_functions.o: aux_functions.c aux_functions.h
 	gcc -c -g -std=c99 -Wall aux_functions.c
 
-global_variables.o:
-	gcc -c -g -std=c99 -Wall global_variables.c
+print_functions.o: print_functions.c print_functions.h
+	gcc -c -g -std=c99 -Wall print_functions.c
 
-
+my_structs.o: my_structs.c my_structs.h
+	gcc -c -g -std=c99 -Wall my_structs.c
