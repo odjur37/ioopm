@@ -1,10 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "my_structs.h"
 #include "aux_functions.h"
 #include "print_functions.h"
 
+typedef struct node{
+  char *key;
+  char *value;
+  struct node *next;
+} *Node;
+
+// creates global int variable choice and sets it to -1
+int choice = -1;
+
+// creates global int variable found
+int found;
+
+// creates global Node variable cursor
+Node cursor; 
+
+// creates a 128 bytes long array in the variable buffer
+char buffer[128]; 
+
+// sets the Node-variable list as a pointer to NULL
+Node list = NULL;
 
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){
