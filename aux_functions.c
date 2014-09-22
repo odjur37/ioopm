@@ -2,16 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "aux_functions.h"
-#include "print_functions.h"
-
-typedef struct node{
-  char *key;
-  char *value;
-  struct node *next;
-} *Node;
-
-// creates global int variable choice and sets it to -1
-int choice = -1;
+#include "print_functions.h" 
 
 // creates global int variable found
 int found;
@@ -23,7 +14,7 @@ Node cursor;
 char buffer[128]; 
 
 // sets the Node-variable list as a pointer to NULL
-Node list = NULL; 
+Node list = NULL;
 
 void readline(char *dest, int n, FILE *source){
   fgets(dest, n, source);
@@ -50,7 +41,7 @@ void read_input_file(char *db){
   }
 }
 
-void presets(){
+void presets(int choice){
   request_input();
   readline(buffer, 128, stdin);
   if (choice != 3){
@@ -64,8 +55,8 @@ void presets(){
 }
 
 // Option 1
-void query(){
-  presets();
+void query(int choice){
+  presets(choice);
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_found_entry();
@@ -81,8 +72,8 @@ void query(){
 }
 
 // Option 2
-void update(){
-  presets();
+void update(int choice){
+  presets(choice);
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_matching_entry();
@@ -105,8 +96,8 @@ void update(){
 }
 
 // Option 3
-void insert(){
-  presets();
+void insert(int choice){
+  presets(choice);
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       print_key_already_exists(cursor->key);
@@ -133,8 +124,8 @@ void insert(){
 }
 
 // Option 4
-void delete(){
-  presets();
+void delete(int choice){
+  presets(choice);
   Node prev = NULL;
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
@@ -162,49 +153,5 @@ void print_database(){
     puts(cursor->key);
     puts(cursor->value);
     cursor = cursor->next;
-  }
-}
-
-void main_loop(){
-  while(choice != 0){
-    print_options();
-    scanf("%d", &choice);
-    while(getchar() != '\n'); // Clear stdin
-    switch(choice){
-    case 1:
-      // Query
-      query();
-      break;
-      
-    case 2:
-      // Update
-      update();
-      break;
-      
-    case 3:
-      // Insert
-      insert();
-      break;
-      
-    case 4:
-      // Delete
-      delete();
-      break;
-      
-    case 5:
-      // Print database
-      print_database();
-      break;
-      
-    case 0:
-      // Exit
-      print_goodbye();
-      break;
-      
-    default:
-      // Please try again
-      print_try_again();
-    }
-    puts("");
   }
 }

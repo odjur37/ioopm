@@ -4,12 +4,6 @@
 #include "aux_functions.h"
 #include "print_functions.h"
 
-typedef struct node{
-  char *key;
-  char *value;
-  struct node *next;
-} *Node;
-
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){
   if (argc < 2){
