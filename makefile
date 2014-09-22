@@ -18,3 +18,4 @@ print_functions.o: print_functions.c print_functions.h
 
 clean:
 	rm *o
+	rm *dSYM/
