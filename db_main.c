@@ -5,16 +5,6 @@
 #include "print_functions.h"
 #include "aux_functions.h"
 
-int choice = -1;
-
-int found;
-
-Node cursor; 
-
-char buffer[128]; 
-
-Node list = NULL;
-
 int main(int argc, char *argv[]){
   
   // Prints welcome text/ASCII-art

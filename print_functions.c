@@ -10,21 +10,6 @@ typedef struct node{
   struct node *next;
 } *Node;
 
-// creates global int variable choice and sets it to -1
-int choice = -1;
-
-// creates global int variable found
-int found;
-
-// creates global Node variable cursor
-Node cursor; 
-
-// creates a 128 bytes long array in the variable buffer
-char buffer[128]; 
-
-// sets the Node-variable list as a pointer to NULL
-Node list = NULL;
-
 // Prints welcome text in form of ASCII-art
 int print_welcome_text(int argc, char *argv[]){
   if (argc < 2){
@@ -80,12 +65,13 @@ int inform_of_found_entry(){
   return 1;
 }
 
-int print_key_and_value(int opt){
-  if (opt != 3){
-    printf("key: %s\nvalue: %s\n", cursor->key, cursor->value);
-  }else{
-    printf("key: %s\nvalue: %s\n", list->key, list->value);
-  }
+int print_key_and_value(char *key, char *value){
+  printf("key: %s\nvalue: %s\n", key, value);
+  return 1;
+}
+
+int print_key_and_value_for_option_3(char *key, char *value){
+  printf("key: %s\nvalue: %s\n", key, value);
   return 1;
 }
 
@@ -110,8 +96,8 @@ int print_successful_insertion(){
     return 1;
 }
 
-int print_key_already_exists(){
-  printf("key \"%s\" already exists!\n", cursor->key);
+int print_key_already_exists(char *key){
+  printf("key \"%s\" already exists!\n", key);
   return 1;
 }
 
@@ -120,8 +106,8 @@ int print_key_is_unique(){
   return 1;
 }
 
-int print_deleted_entry(){
-  printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", cursor->key, cursor->value);
+int print_deleted_entry(char *key, char *value){
+  printf("Deleted the following entry:\nkey: %s\nvalue: %s\n", key, value);
   return 1;
 }
 

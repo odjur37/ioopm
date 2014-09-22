@@ -12,7 +12,9 @@ int inform_of_duplicate_key_search();
 
 int inform_of_found_entry();
 
-int print_key_and_value(int opt);
+int print_key_and_value(char *key, char *value);
+
+int print_key_and_value_for_option_3(char *key, char *value);
 
 int print_no_matching_key(char *buffer);
 
@@ -22,11 +24,11 @@ int request_new_value();
 
 int print_successful_insertion();
 
-int print_key_already_exists();
+int print_key_already_exists(char *key);
 
 int print_key_is_unique();
 
-int print_deleted_entry();
+int print_deleted_entry(char *key, char *value);
 
 int print_goodbye();
 

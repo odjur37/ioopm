@@ -69,7 +69,7 @@ void query(){
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_found_entry();
-      print_key_and_value(1);
+      print_key_and_value(cursor->key, cursor->value);
       found = 1;
     }else{
       cursor = cursor->next;
@@ -86,7 +86,7 @@ void update(){
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
       inform_of_matching_entry();
-      print_key_and_value(2);
+      print_key_and_value(cursor->key, cursor->value);
       found = 1;
     }else{
       cursor = cursor->next;
@@ -109,7 +109,7 @@ void insert(){
   presets();
   while(!found && cursor != NULL){
     if(strcmp(buffer, cursor->key) == 0){
-      print_key_already_exists();
+      print_key_already_exists(cursor->key);
       found = 1;
     }else{
       cursor = cursor->next;
@@ -128,7 +128,7 @@ void insert(){
     list = newNode;
     puts("");
     print_successful_insertion();
-    print_key_and_value(3);
+    print_key_and_value_for_option_3(list->key, list->value);
   }
 }
 
@@ -144,7 +144,7 @@ void delete(){
 	prev->next = cursor->next;
       }
       found = 1;
-      print_deleted_entry();
+      print_deleted_entry(cursor->key, cursor->value);
     }else{
       prev = cursor;
       cursor = cursor->next;
