@@ -28,16 +28,16 @@ void read_input_file(char *db){
   char *filename = db;
   print_loading_database(db);
   FILE *database = fopen(filename, "r");
-  while(!(feof(database))){
-    Node newNode = malloc(sizeof(struct node));
-    readline(buffer, 128, database);
-    newNode->key = malloc(strlen(buffer) + 1);
-    strcpy(newNode->key, buffer);
-    readline(buffer, 128, database);
-    newNode->value = malloc(strlen(buffer) + 1);
-    strcpy(newNode->value, buffer);
-    newNode->next = list;
-    list = newNode;
+  while(!(feof(database))){                      //Sålänge !EOF db, loopa:
+    Node newNode = malloc(sizeof(struct node));  //Reserverar plats i stacken för en node
+    readline(buffer, 128, database);             //Läs första entryt i db och ersätt radbrytning med null-tecknet
+    newNode->key = malloc(strlen(buffer) + 1);   //Allokera minne för längden för nodens key
+    strcpy(newNode->key, buffer);                //Kopiera "key" till arrayen "buffer"
+    readline(buffer, 128, database);             //Läs 
+    newNode->value = malloc(strlen(buffer) + 1); //
+    strcpy(newNode->value, buffer);              //kopiera value-strängen till arrayen buffer
+    newNode->next = list;                        //
+    list = newNode;                              //skapar newNode på nextplatsen för att skapa en plats för nästa entry i db
   }
 }
 

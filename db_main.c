@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "database_functions.h"
 #include "print_functions.h"
-#include "aux_functions.h"
+
 
 // creates global int variable choice and sets it to -1
 int choice = -1;
