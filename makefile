@@ -11,11 +11,7 @@ database_functions.o: database_functions.c database_functions.h
 	$(CC) $(FLAGS) database_functions.c
 
 print_functions.o: print_functions.c print_functions.h
-	$(CC) $(FLAGS) print_functions.c
-
-#my_structs.o: my_structs.c my_structs.h
-#	$(CC) $(FLAGS) my_structs.c 
+	$(CC) $(FLAGS) print_functions.c	
 
 clean:
-	rm *o
-	rm *dSYM/
+	rm *.o

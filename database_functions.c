@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "aux_functions.h"
-#include "print_functions.h" 
+#include "database_functions.h"
+#include "print_functions.h"
 
 // creates global int variable found
 int found;

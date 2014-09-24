@@ -9,7 +9,7 @@ typedef struct node{
 } *Node;
 
 // creates global int variable choice and sets it to -1
-int choice = -1;
+int choice =
 
 // creates global int variable found
 int found;
